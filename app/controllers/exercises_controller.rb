@@ -8,12 +8,15 @@ class ExercisesController < ApplicationController
 
   def exercise2
     # 【要件】注文されていない料理を提供してる店 
-    #   * left_outer_joinsを使うこと
-    # @shops = Shop.left_outer_joins(:)
-    # .select(:name)
-    # .from(foods, order_foods, shops, )
-    # .order(foods: :name)
-    # .where(id:nill)
+      # * left_outer_joinsを使うこと
+      # 1: shop 多 :foods
+      # 1: foods 多: order_foods 
+      # 考え方1️⃣ shopからfoods見てる
+      # 考え方2️⃣ shopからorder_foods見てる
+      # shopから見たfoods [foods:]
+      # shopから見たorder_foods[:order_foods]
+    @shops = Shop.left_outer_joins(foods: :order_foods)
+    .where(foods: {order_foods: { id: nil }} )
   end
 
   def exercise3 
