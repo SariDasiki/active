@@ -38,9 +38,10 @@ class ExercisesController < ApplicationController
     #   * 取得したCustomerのインスタンスにfoods_price_sumと呼びかけると合計金額を返すこと
     # customerからfoodを知りたい
     # 次、orderからfoodを見たい→ customerからfoodsを見ることになる(orde_foodsは省力) 
+    # お客さんからのデータが欲しいから、customersテーブルをselectしてる
     @customer= Customer.joins(orders: :foods)
     .group("customers.id" )
-    .select("customers.*, COUNT(order_foods.*) as foods_price_sum")
+    .select("customers.*, SUM(foods.price) as foods_price_sum")
     .order("foods_price_sum DESC")
     .first
   end
