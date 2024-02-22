@@ -41,7 +41,7 @@ class ExercisesController < ApplicationController
     @customer= Customer.joins(orders: :foods)
     .group("customers.id" )
     .select("orders.*, foods.*, COUNT(order_foods.*) as foods_price_sum")
-    .order("orders_price_sum DESC")
+    .order("foods_price_sum DESC")
     .first
   end
 end
