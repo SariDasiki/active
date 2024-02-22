@@ -40,7 +40,7 @@ class ExercisesController < ApplicationController
     # 次、orderからfoodを見たい→ customerからfoodsを見ることになる(orde_foodsは省力) 
     @customer= Customer.joins(orders: :foods)
     .group("customers.id" )
-    .select("orders.*, foods.*, COUNT(order_foods.*) as foods_price_sum")
+    .select("customers.*, COUNT(order_foods.*) as foods_price_sum")
     .order("foods_price_sum DESC")
     .first
   end
