@@ -16,6 +16,7 @@ class ExercisesController < ApplicationController
       # shopから見たfoods [foods:]
       # shopから見たorder_foods[:order_foods]
     @shops = Shop.left_outer_joins(foods: :order_foods)
+    .distinct
     .where(foods: {order_foods: { id: nil }} )
   end
 
